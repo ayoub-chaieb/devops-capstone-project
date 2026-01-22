@@ -68,7 +68,7 @@ def create_accounts():
 # READ AN ACCOUNT
 ######################################################################
 @app.route("/accounts/<int:id>", methods=["GET"])
-def read_account(id):
+def get_account(id):
     """
     Reads an Account
     This endpoint will read a single Account based on the id that is requested
