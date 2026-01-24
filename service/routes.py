@@ -72,6 +72,7 @@ def list_accounts():
     app.logger.info("List contains %s Accounts", len(accounts_list))
     return jsonify(accounts_list), status.HTTP_200_OK
 
+
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
@@ -93,6 +94,7 @@ def get_account(id):
         jsonify(message), status.HTTP_200_OK
     )
 
+
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
@@ -113,6 +115,7 @@ def update_accounts(id):
     account.update()
     return account.serialize(), status.HTTP_200_OK
 
+
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
@@ -128,6 +131,7 @@ def delete_accounts(id):
     if account:
         account.delete()
     return "", status.HTTP_204_NO_CONTENT
+
 
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
