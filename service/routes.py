@@ -29,7 +29,7 @@ def index():
         jsonify(
             name="Account REST API Service",
             version="1.0",
-            # paths=url_for("list_accounts", _external=True),
+            paths=url_for("list_accounts", _external=True),
         ),
         status.HTTP_200_OK,
     )
@@ -96,9 +96,22 @@ def get_account(id):
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
-
-# ... place you code here to UPDATE an account ...
-
+@app.route("/accounts/<int:id>", methods=["PUT"])
+def update_accounts(id):
+    """
+    Update an Account
+    This endpoint will update an Account based on the posted data
+    """
+    app.logger.info("Request to update an Account with id: %s", id)
+    account = Account.find(id)
+    if not account:
+        abort(
+            status.HTTP_404_NOT_FOUND,
+            f"Account with id [{id}] could not be found."
+        )
+    account.deserialize(request.get_json())
+    account.update()
+    return account.serialize(), status.HTTP_200_OK
 
 ######################################################################
 # DELETE AN ACCOUNT
