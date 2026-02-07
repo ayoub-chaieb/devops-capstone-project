@@ -147,7 +147,7 @@ class TestAccountService(TestCase):
         response = self.client.get(f"/accounts/{99}")
         new_account = response.get_json()
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        
+
     def test_account_not_found(self):
         """It should not Read an Account that is not found"""
         id = 0
@@ -158,7 +158,7 @@ class TestAccountService(TestCase):
 
     def test_list_accounts(self):
         """It should Get a list of Accounts"""
-        account = self._create_accounts(10)
+        self._create_accounts(10)
         response = self.client.get(
             BASE_URL, content_type="application/json"
         )
@@ -174,7 +174,7 @@ class TestAccountService(TestCase):
         test_account = AccountFactory()
         response = self.client.post(BASE_URL, json=test_account.serialize())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        
+
         # update the account
         new_account = response.get_json()
         new_account["name"] = "Ayoub"
@@ -206,7 +206,7 @@ class TestAccountService(TestCase):
         }
         for key, value in headers.items():
             self.assertEqual(response.headers.get(key), value)
-    
+
     def test_cors_security(self):
         """It should return a CORS header"""
         response = self.client.get('/', environ_overrides=HTTPS_ENVIRON)
